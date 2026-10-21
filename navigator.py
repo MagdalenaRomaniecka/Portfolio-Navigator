@@ -9,16 +9,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- FAST HELPER FUNCTION ---
-@st.cache_data
-def find_file(filename):
-    # Fast search - skips heavy system folders to avoid infinite loading delays
-    for root, dirs, files in os.walk("."):
-        dirs[:] = [d for d in dirs if not d.startswith('.') and d not in ['venv', 'env', '__pycache__', 'node_modules']]
-        if filename in files:
-            return os.path.join(root, filename)
-    return filename
-
 # --- DESIGN SYSTEM (DARK LUXURY) ---
 st.markdown("""
     <style>
@@ -116,13 +106,15 @@ def main():
         """, unsafe_allow_html=True)
 
     with col_video:
-        video_path = find_file("Auditing_Magdalena_Romaniecka_Fragrance_Data_Architecture.mp4")
-        if os.path.exists(video_path):
-            st.video(video_path)
+        # BEZPOŚREDNIE WSKAZANIE PLIKU (Rozwiązuje problem z zawieszaniem!)
+        video_filename = "Auditing_Magdalena_Romaniecka_Fragrance_Data_Architecture.mp4"
+        
+        if os.path.isfile(video_filename):
+            st.video(video_filename)
         else:
-            st.markdown("""
+            st.markdown(f"""
             <div style="border: 1px dashed rgba(212,175,55,0.4); padding: 80px 20px; text-align: center; color: #888888; background-color: #121212;">
-                [ EXECUTIVE AUDIT VIDEO NOT FOUND ]<br>Please place 'Auditing_Magdalena_Romaniecka_Fragrance_Data_Architecture.mp4' in the root directory.
+                [ EXECUTIVE AUDIT VIDEO NOT FOUND ]<br>Please place '{video_filename}' in the root directory.
             </div>
             """, unsafe_allow_html=True)
 
