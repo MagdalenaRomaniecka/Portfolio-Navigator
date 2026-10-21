@@ -9,13 +9,17 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# --- FAST HELPER FUNCTION ---
+@st.cache_data
 def find_file(filename):
-    for root, _, files in os.walk("."):
-        if filename and filename in files:
+    # Fast search - skips heavy system folders to avoid infinite loading delays
+    for root, dirs, files in os.walk("."):
+        dirs[:] = [d for d in dirs if not d.startswith('.') and d not in ['venv', 'env', '__pycache__', 'node_modules']]
+        if filename in files:
             return os.path.join(root, filename)
     return filename
 
-# --- DESIGN SYSTEM (DARK LUXURY & RESPONSIVENESS) ---
+# --- DESIGN SYSTEM (DARK LUXURY) ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Lato:wght@300;400;700&display=swap');
@@ -75,7 +79,7 @@ st.markdown("""
         padding-top: 30px; margin-top: 60px; margin-bottom: 20px;
     }
     
-    /* --- RESPONSIVE VIDEO FIX --- */
+    /* Responsive video wrapper */
     [data-testid="stVideo"] {
         max-width: 320px !important;
         margin: 0 auto !important;
@@ -84,19 +88,12 @@ st.markdown("""
         border-radius: 8px;
         box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
     }
-    
-    /* --- MOBILE RESPONSIVENESS --- */
-    @media (max-width: 768px) {
-        .hero-title { font-size: 2rem; }
-        .hero-subtitle { font-size: 0.9rem; }
-        .hero-pitch { font-size: 0.95rem; }
-        .giant-cta-btn { font-size: 1rem; padding: 15px 20px; }
-    }
     </style>
 """, unsafe_allow_html=True)
 
 def main():
-    col_text, col_video = st.columns([1, 1], gap="large")
+    # --- SPLIT SCREEN HERO SECTION ---
+    col_text, col_video = st.columns([1, 1.2], gap="large")
     
     with col_text:
         st.markdown("""
