@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- HELPER FUNCTION (Szuka plików w folderze) ---
+# --- HELPER FUNCTION ---
 def find_file(filename):
     for root, _, files in os.walk("."):
         if filename and filename in files:
@@ -70,17 +70,6 @@ st.markdown("""
         box-shadow: 0 15px 40px rgba(212, 175, 55, 0.35);
         background: linear-gradient(145deg, #E5C354 0%, #D4AF37 100%);
     }
-    .section-title {
-        font-family: 'Tenor Sans', sans-serif;
-        color: #D4AF37;
-        font-size: 1.8rem;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        margin: 60px 0 30px 0;
-        text-align: center;
-        border-bottom: 1px solid rgba(212,175,55,0.3);
-        padding-bottom: 15px;
-    }
     .footer { text-align: center; color: #555555; font-size: 0.75rem; letter-spacing: 3px; border-top: 1px solid #1F1F1F; padding-top: 30px; margin-top: 60px; margin-bottom: 20px;}
     </style>
 """, unsafe_allow_html=True)
@@ -117,22 +106,6 @@ def main():
             st.markdown("""
             <div style="border: 1px dashed rgba(212,175,55,0.4); padding: 80px 20px; text-align: center; color: #888888; background-color: #121212;">
                 [ EXECUTIVE AUDIT VIDEO NOT FOUND ]<br>Please place 'Auditing_Magdalena_Romaniecka_Fragrance_Data_Architecture.mp4' in the root directory.
-            </div>
-            """, unsafe_allow_html=True)
-
-    # --- ARCHITECTURE INFOGRAPHIC SECTION ---
-    st.markdown('<div class="section-title">The Anti-Crisis Architecture</div>', unsafe_allow_html=True)
-    
-    # Wyśrodkowanie obrazka
-    _, col_img, _ = st.columns([1, 10, 1])
-    with col_img:
-        img_path = find_file("Data_Architecture_Anti_Crisis_Shield (1).png")
-        if os.path.exists(img_path):
-            st.image(img_path, use_column_width=True)
-        else:
-            st.markdown("""
-            <div style="border: 1px dashed rgba(212,175,55,0.4); padding: 80px 20px; text-align: center; color: #888888; background-color: #121212;">
-                [ ARCHITECTURE DIAGRAM NOT FOUND ]<br>Please place 'Data_Architecture_Anti_Crisis_Shield (1).png' in the root directory.
             </div>
             """, unsafe_allow_html=True)
 
