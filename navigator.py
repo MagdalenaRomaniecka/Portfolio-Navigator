@@ -9,6 +9,15 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# --- FAST HELPER FUNCTION ---
+@st.cache_data
+def find_file(filename):
+    for root, dirs, files in os.walk("."):
+        dirs[:] = [d for d in dirs if not d.startswith('.') and d not in ['venv', 'env', '__pycache__', 'node_modules']]
+        if filename in files:
+            return os.path.join(root, filename)
+    return filename
+
 # --- DESIGN SYSTEM (DARK LUXURY) ---
 st.markdown("""
     <style>
@@ -69,7 +78,7 @@ st.markdown("""
         padding-top: 30px; margin-top: 60px; margin-bottom: 20px;
     }
     
-    /* Responsive video wrapper */
+    /* Responsive video wrapper - PREVENTS STRETCHING */
     [data-testid="stVideo"] {
         max-width: 320px !important;
         margin: 0 auto !important;
@@ -82,7 +91,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def main():
-    # --- SPLIT SCREEN HERO SECTION ---
     col_text, col_video = st.columns([1, 1.2], gap="large")
     
     with col_text:
@@ -90,9 +98,9 @@ def main():
             <div class="hero-title">Magdalena Romaniecka</div>
             <div class="hero-subtitle">Data Architect ✦ Web Analytics ✦ CRO</div>
             <div class="hero-pitch">
-                Bridging Data Engineering with Conversion Rate Optimization (CRO). 
-                I specialize in Python, NLP (SBERT), and Streamlit architectures to transform raw macroeconomic 
-                and behavioral data into scalable enterprise solutions. 
+                Data Architecture fueled by AI-Assisted Engineering. 
+                I design scalable Python, NLP (SBERT), and Streamlit ecosystems that neutralize e-commerce bottlenecks. 
+                By leveraging Prompt-Driven development, I transform abstract market data into immediate business ROI.
                 <br><br>
                 Welcome to the Phygital Architecture.
             </div>
@@ -106,11 +114,11 @@ def main():
         """, unsafe_allow_html=True)
 
     with col_video:
-        # BEZPOŚREDNIE WSKAZANIE PLIKU (Rozwiązuje problem z zawieszaniem!)
         video_filename = "Auditing_Magdalena_Romaniecka_Fragrance_Data_Architecture.mp4"
+        video_path = find_file(video_filename)
         
-        if os.path.isfile(video_filename):
-            st.video(video_filename)
+        if video_path and os.path.isfile(video_path):
+            st.video(video_path)
         else:
             st.markdown(f"""
             <div style="border: 1px dashed rgba(212,175,55,0.4); padding: 80px 20px; text-align: center; color: #888888; background-color: #121212;">
