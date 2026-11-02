@@ -99,8 +99,8 @@ def main():
             <div class="hero-subtitle">Data Architect ✦ Web Analytics ✦ CRO</div>
             <div class="hero-pitch">
                 Data Architecture fueled by AI-Assisted Engineering. 
-                I design scalable Python, NLP (SBERT), and Streamlit ecosystems that neutralize e-commerce bottlenecks. 
-                By leveraging Prompt-Driven development, I transform abstract market data into immediate business ROI.
+                I design scalable Python, NLP (SBERT), and Streamlit ecosystems that solve e-commerce "sensory doubt." 
+                By leveraging Prompt-Driven logic, I translate abstract fragrance data into precise vector matrices, neutralizing the industry-specific 0.28% conversion bottleneck to rescue abandoned carts.
                 <br><br>
                 Welcome to the Phygital Architecture.
             </div>
